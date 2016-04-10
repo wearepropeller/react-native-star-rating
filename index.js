@@ -71,24 +71,28 @@ class StarRating extends Component {
       } else if (starsLeft === 0.5) {
         starIconName = this.props.halfStar;
       }
-      starButtons.push(
-        <Button
-          activeOpacity={0.20}
-          disabled={this.props.disabled}
-          key={i + 1}
-          onPress={this.pressStarButton.bind(this, i + 1)}
-          style={{
-            height: this.props.starSize,
-            width: this.props.starSize,
-          }}
-        >
-          <Icon
+
+      if(this.props.showEmpty || starsLeft > 0) {
+        starButtons.push(
+          <Button
+            activeOpacity={0.20}
+            disabled={this.props.disabled}
+            key={i + 1}
+            onPress={this.pressStarButton.bind(this, i + 1)}
+            style={{
+              height: this.props.starSize,
+              width: this.props.starSize,
+            }}
+          >
+            <Icon
             name={starIconName}
             size={this.props.starSize}
             color={this.props.starColor}
-          />
-        </Button>
-      );
+            />
+          </Button>
+        );
+      }
+      
       starsLeft--;
     }
     return (
